@@ -1,0 +1,10 @@
+.layout { min-height: 100vh; background: #0F0F0F; color: #F5F5F5; font-family: 'Inter', sans-serif; }
+.layout__nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; border-bottom: 1px solid #2A2A2A; }
+.layout__logo { font-size: 1.25rem; font-weight: 700; cursor: pointer; letter-spacing: -0.5px; }
+.layout__nav-right { display: flex; gap: 12px; align-items: center; }
+.layout__user { font-size: 0.875rem; color: #9E9E9E; }
+.layout__btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #2A2A2A; background: transparent; color: #F5F5F5; cursor: pointer; font-size: 0.875rem; transition: all 0.2s; }
+.layout__btn:hover { border-color: #E85D04; color: #E85D04; }
+.layout__btn--primary { background: #E85D04; border-color: #E85D04; color: #fff; }
+.layout__btn--primary:hover { background: #C44C00; border-color: #C44C00; color: #fff; }
+.layout__main { padding: 0; }
