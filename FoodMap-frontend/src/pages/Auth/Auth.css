@@ -1,0 +1,124 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1208;
+  padding: 24px;
+}
+
+.auth-page__title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 6px;
+}
+
+.auth-page__sub {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.auth-page__error {
+  background: #fff5f5;
+  border: 1px solid #ffcdd2;
+  color: #c62828;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.auth-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.auth-page__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-page__label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-page__forgot {
+  font-size: 0.8rem;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-page__submit {
+  width: 100%;
+  background: var(--color-primary-dark) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 12px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.auth-page__divider {
+  text-align: center;
+  position: relative;
+  margin: 20px 0;
+  color: #bbb;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.auth-page__divider::before,
+.auth-page__divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.auth-page__divider::before { left: 0; }
+.auth-page__divider::after  { right: 0; }
+
+.auth-page__social {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.auth-page__social-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.auth-page__social-btn:hover { border-color: var(--color-primary); }
+
+.auth-page__footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.auth-page__footer a {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  text-decoration: none;
+}

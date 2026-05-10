@@ -1,7 +1,0 @@
-.btn { padding: 12px 24px; border-radius: 10px; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.btn--primary { background: #E85D04; color: #fff; }
-.btn--primary:hover:not(:disabled) { background: #C44C00; transform: translateY(-1px); }
-.btn--secondary { background: transparent; color: #F5F5F5; border: 1px solid #2A2A2A; }
-.btn--secondary:hover:not(:disabled) { border-color: #E85D04; color: #E85D04; }
-.btn--full { width: 100%; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }

@@ -1,0 +1,6 @@
+.label {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a4a4a;
+}

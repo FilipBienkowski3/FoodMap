@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { useAuth } from './context/useAuth'
-import Layout from './components/Layout/Layout'
 import Home     from './pages/Home/Home'
 import Login    from './pages/Auth/Login/Login'
 import Register from './pages/Auth/Register/Register'
@@ -16,7 +15,6 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   return (
     <BrowserRouter>
-      <Layout>
         <Routes>
           <Route path={ROUTES.HOME}     element={<Home />} />
           <Route path={ROUTES.LOGIN}    element={<Login />} />
@@ -25,7 +23,6 @@ function AppRoutes() {
             <ProtectedRoute><Map /></ProtectedRoute>
           } />
         </Routes>
-      </Layout>
     </BrowserRouter>
   )
 }
