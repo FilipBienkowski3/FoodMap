@@ -5,7 +5,7 @@ interface ButtonProps {
   children: ReactNode
   onClick?: () => void
   type?: 'button' | 'submit'
-  variant?: 'primary' | 'outline'
+  variant?: 'primary' | 'outline' | 'none'
   disabled?: boolean
   fullWidth?: boolean
   className?: string
@@ -17,7 +17,7 @@ export function Button({ children, onClick, type = 'button', variant = 'primary'
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`btn btn--${variant} ${fullWidth ? 'btn--full' : ''} ${className}`}
+      className={`${variant !== 'none' ? `btn btn--${variant}` : ''} ${fullWidth ? 'btn--full' : ''} ${className}`.trim()}
     >
       {children}
     </button>
