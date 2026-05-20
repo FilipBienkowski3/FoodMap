@@ -5,6 +5,10 @@ import Home     from './pages/Home/Home'
 import Login    from './pages/Auth/Login/Login'
 import Register from './pages/Auth/Register/Register'
 import Map      from './pages/Map/Map'
+import Explore  from './pages/Explore/Explore'
+import Activity from './pages/Activity/Activity'
+import Profile  from './pages/Profile/Profile'
+import Vote     from './pages/Vote/Vote'
 import { ROUTES } from './constants/routes'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -19,9 +23,11 @@ function AppRoutes() {
           <Route path={ROUTES.HOME}     element={<Home />} />
           <Route path={ROUTES.LOGIN}    element={<Login />} />
           <Route path={ROUTES.REGISTER} element={<Register />} />
-          <Route path={ROUTES.MAP}      element={
-            <ProtectedRoute><Map /></ProtectedRoute>
-          } />
+          <Route path={ROUTES.MAP}      element={<ProtectedRoute><Map /></ProtectedRoute>} />
+          <Route path={ROUTES.EXPLORE}  element={<ProtectedRoute><Explore /></ProtectedRoute>} />
+          <Route path={ROUTES.ACTIVITY} element={<ProtectedRoute><Activity /></ProtectedRoute>} />
+          <Route path={ROUTES.PROFILE}  element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path={ROUTES.VOTE}     element={<ProtectedRoute><Vote /></ProtectedRoute>} />
         </Routes>
     </BrowserRouter>
   )

@@ -3,4 +3,8 @@ export const ROUTES = {
   LOGIN:    '/login',
   REGISTER: '/register',
   MAP:      '/map',
+  EXPLORE:  '/explore',
+  ACTIVITY: '/activity',
+  PROFILE:  '/profile',
+  VOTE:     '/vote',
 }

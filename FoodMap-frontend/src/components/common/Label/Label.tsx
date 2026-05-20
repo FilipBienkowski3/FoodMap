@@ -4,11 +4,12 @@ import './Label.css'
 interface LabelProps {
   htmlFor?: string
   children: ReactNode
+  className?: string
 }
 
-export function Label({ htmlFor, children }: LabelProps) {
+export function Label({ htmlFor, children, className = '' }: LabelProps) {
   return (
-    <label htmlFor={htmlFor} className="label">
+    <label htmlFor={htmlFor} className={`label ${className}`.trim()}>
       {children}
     </label>
   )

@@ -6,11 +6,15 @@ interface InputProps {
   placeholder?: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   required?: boolean
   minLength?: number
+  min?: number
+  step?: number
+  className?: string
 }
 
-export function Input({ id, type = 'text', placeholder, value, onChange, required, minLength }: InputProps) {
+export function Input({ id, type = 'text', placeholder, value, onChange, onKeyDown, required, minLength, min, step, className = '' }: InputProps) {
   return (
     <input
       id={id}
@@ -18,9 +22,12 @@ export function Input({ id, type = 'text', placeholder, value, onChange, require
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       required={required}
       minLength={minLength}
-      className="input"
+      min={min}
+      step={step}
+      className={`input ${className}`.trim()}
     />
   )
 }
