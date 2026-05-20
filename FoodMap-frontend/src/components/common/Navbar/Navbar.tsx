@@ -3,10 +3,10 @@ import { ROUTES } from '../../../constants/routes'
 import './Navbar.css'
 
 const TABS = [
-  { label: 'Map',      icon: 'map',           route: ROUTES.MAP,      fill: true  },
-  { label: 'Explore',  icon: 'search',        route: ROUTES.EXPLORE,  fill: false },
-  { label: 'Activity', icon: 'notifications', route: ROUTES.ACTIVITY, fill: false },
-  { label: 'Profile',  icon: 'person',        route: ROUTES.PROFILE,  fill: false },
+  { label: 'Map', icon: 'map', route: ROUTES.MAP, fill: true, badge: false },
+  { label: 'Explore', icon: 'search', route: ROUTES.EXPLORE, fill: false, badge: false },
+  { label: 'Activity', icon: 'notifications', route: ROUTES.ACTIVITY, fill: false, badge: true },
+  { label: 'Profile', icon: 'person', route: ROUTES.PROFILE, fill: false, badge: false },
 ]
 
 export default function Navbar() {
