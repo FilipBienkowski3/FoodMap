@@ -18,7 +18,7 @@ export default function Home() {
         <div className="home__nav-links">
           {user ? (
             <>
-              <span className="home__nav-greeting">Hej, {user.name}</span>
+              <span className="home__nav-greeting">Hello {user.name}</span>
               <Button onClick={() => { logout(); }} variant="outline" className="home__btn-outline">
                 Wyloguj
               </Button>

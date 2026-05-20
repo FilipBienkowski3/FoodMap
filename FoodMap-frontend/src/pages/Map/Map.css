@@ -3,8 +3,8 @@
   flex-direction: column;
   height: 100dvh;
   overflow: hidden;
-  font-family: var(--font-body);
-  background: #f9f9f9;
+  font-family: var(--font-family);
+  background: var(--color-surface);
 }
 
 .mp__canvas {
@@ -92,9 +92,9 @@
 .mp__search-input {
   flex: 1;
   border: none; outline: none;
-  font-family: var(--font-body);
+  font-family: inherit;
   font-size: 0.95rem;
-  color: #1a1c1c;
+  color: var(--color-on-surface);
   background: transparent;
   min-width: 0;
 }
@@ -286,7 +286,7 @@
 
 .mp__fab-wrap {
   position: absolute;
-  bottom: 16px; left: 16px; right: 16px;
+  bottom: 88px; left: 16px; right: 16px;
   z-index: 10;
   display: flex;
 }
@@ -294,16 +294,16 @@
 .mp__fab {
   flex: 1;
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  background: var(--color-primary-dark);
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
   border: none; border-radius: 9999px;
   padding: 16px 28px;
-  font-family: var(--font-body);
-  font-size: 0.78rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s;
+  box-shadow: 0 4px 16px rgba(139,80,0,0.24);
+  pointer-events: auto;
 }
 .mp__fab:active { transform: scale(0.97); }
 .mp__fab .material-symbols-outlined { font-size: 20px; }

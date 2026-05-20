@@ -1,20 +1,19 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../../../context/useAuth'
-import { loginUser } from '../../../api/foodmapApi'
-import {Button }from '../../../components/common/Button/Button'
-import {Label} from '../../../components/common/Label/Label'
-import { Input }from '../../../components/common/Input/Input'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../../config/firebase'
+import { Button } from '../../../components/common/Button/Button'
+import { Label } from '../../../components/common/Label/Label'
+import { Input } from '../../../components/common/Input/Input'
 import AuthCard from '../../../components/common/AuthCard/AuthCard'
 import { ROUTES } from '../../../constants/routes'
 import '../Auth.css'
 
 export default function Login() {
-  const [email, setEmail]       = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError]       = useState('')
-  const [loading, setLoading]   = useState(false)
-  const { login } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const nav = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,11 +21,15 @@ export default function Login() {
     setLoading(true)
     setError('')
     try {
-      const data = await loginUser(email, password)
-      if (data.ok) { login(data.user); nav(ROUTES.HOME) }
-      else setError(data.message)
-    } catch { setError('Błąd połączenia z serwerem') }
-    finally { setLoading(false) }
+      await signInWithEmailAndPassword(auth, email, password)
+      nav(ROUTES.HOME)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Log in error')
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -56,13 +59,6 @@ export default function Login() {
             {loading ? 'Logging in...' : 'Login'}
           </Button>
         </form>
-
-        <div className="auth-page__divider"><span>OR CONTINUE WITH</span></div>
-
-        <div className="auth-page__social">
-          <button className="auth-page__social-btn">Google</button>
-          <button className="auth-page__social-btn">Apple</button>
-        </div>
 
         <p className="auth-page__footer">
           Don't have an account? <Link to={ROUTES.REGISTER}>Join FoodMap</Link>
