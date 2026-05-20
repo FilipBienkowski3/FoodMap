@@ -1,26 +1,31 @@
 :root {
-  --color-primary:      #FF9800;
-  --color-primary-dark: #E65100;
-  --color-secondary:    #FFC107;
-  --color-tertiary:     #212121;
-  --color-neutral:      #F5F5F5;
-  --color-text-muted:   #6B6B6B;
-  --color-bg-dark:      #1A1208;
-  --color-error:        #D32F2F;
-  --font-heading:       'Playfair Display', serif;
-  --font-body:          'DM Sans', sans-serif;
-  --radius:             0.75rem;
+    --color-primary: #8b5000;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #ff9800;
+    --color-secondary: #785900;
+    --color-surface: #f9f9f9;
+    --color-on-surface: #1a1c1c;
+    --color-on-surface-variant: #554434;
+    --color-outline: #887361;
+    --color-error: #ba1a1a;
+    --font-family: "Inter", sans-serif;
+    --radius: 0.5rem;
+    --radius-xl: 1.5rem;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
-  font-family: var(--font-body);
-  background: var(--color-bg-dark);
-  color: var(--color-tertiary);
-  -webkit-font-smoothing: antialiased;
+    font-family: var(--font-family);
+    background: var(--color-surface);
+    color: var(--color-on-surface);
+    -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3 {
-  font-family: var(--font-heading);
+button {
+    font-family: inherit;
 }
