@@ -1,0 +1,439 @@
+.vote-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    background-color: #f8f7f5; /* subtle off-white */
+    font-family: "Inter", sans-serif;
+    padding-bottom: 120px;
+}
+
+.vote-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background-color: #f8f7f5;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.vote-header-back {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #212121;
+}
+
+.vote-header-title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #8a5a19;
+}
+
+.vote-header-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    object-fit: cover;
+}
+
+.vote-content {
+    flex: 1;
+    padding: 16px 24px;
+}
+
+.vote-step-indicator {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #8a5a19;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.vote-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 8px 0;
+}
+
+.vote-description {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0 0 24px 0;
+}
+
+.vote-section-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vote-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.vote-input-wrapper .material-symbols-outlined {
+    position: absolute;
+    left: 12px;
+    color: #888;
+}
+
+.vote-input {
+    width: 100%;
+    padding: 14px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fcfcfc;
+    outline: none;
+}
+.vote-input.with-icon {
+    padding-left: 40px;
+}
+.vote-input:focus {
+    border-color: #8a5a19;
+}
+
+.vote-friends-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+.vote-friend-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.vote-friend-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+.vote-friend-item.selected .vote-friend-avatar {
+    border-color: #8a5a19;
+}
+
+.vote-friend-check {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #8a5a19;
+    color: #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.vote-friend-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Step 2 specific */
+.vote-cravings-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.vote-craving-card {
+    flex: 0 0 100px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.vote-craving-card.selected {
+    border-color: #8a5a19;
+    border-width: 2px;
+}
+
+.vote-craving-img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    background: #eaeaea;
+}
+
+.vote-craving-label {
+    padding: 8px;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.vote-craving-check {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #8a5a19;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.vote-subtitle {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.vote-venue-card {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+.vote-venue-card.selected {
+    border-color: #8a5a19;
+    border-width: 1px;
+}
+
+.vote-venue-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.vote-venue-info {
+    flex: 1;
+}
+
+.vote-venue-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #212121;
+    margin: 0 0 4px 0;
+}
+
+.vote-venue-meta {
+    font-size: 0.8rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.vote-venue-distance {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 4px;
+}
+
+.vote-venue-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    border-left: 1px solid #f0f0f0;
+    padding-left: 12px;
+}
+
+.vote-venue-count {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #8a5a19;
+    line-height: 1;
+}
+.vote-venue-count-label {
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.vote-venue-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #888;
+}
+.vote-venue-btn.voted {
+    background: #8a5a19;
+    border-color: #8a5a19;
+    color: #fff;
+}
+
+.vote-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #eaeaea;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Step 3 specific */
+.vote-dates-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+}
+
+.vote-date-chip {
+    flex: 0 0 60px;
+    padding: 12px 8px;
+    border-radius: 8px;
+    border: 1px solid #deb887;
+    background: #fdf9f3;
+    color: #8a5a19;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.vote-date-chip.selected {
+    border-width: 2px;
+    font-weight: bold;
+}
+
+.vote-date-day {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.vote-date-num {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.vote-time-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+
+.vote-time-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 12px;
+    position: relative;
+}
+.vote-time-slot.selected {
+    border: 2px solid #8a5a19;
+    background: #fdf9f3;
+}
+
+.vote-time-slot-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #212121;
+}
+.vote-time-slot.selected .vote-time-slot-label {
+    color: #8a5a19;
+}
+
+.vote-time-slot-avail {
+    font-size: 0.75rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+}
+.vote-time-slot.selected .vote-time-slot-avail {
+    color: #8a5a19;
+}
+
+/* Bottom Actions */
+.vote-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 24px 24px;
+    background: linear-gradient(to top, #f8f7f5 70%, rgba(248, 247, 245, 0));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vote-bottom-bar-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.vote-btn-primary {
+    width: 100%;
+    background: #8a5a19;
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
