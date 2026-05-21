@@ -22,6 +22,17 @@ A dedicated profile view for authenticated users to track their culinary journey
 - **Dynamic User Data**: Displays name retrieved directly from Firebase Authentication.
 - **Personalized Content**: "Visited" and "Want to Visit" tabs for tracking food spots.
 
+## Voting System (DineVote)
+
+A multi-stage voting process to help groups decide on a venue and time.
+
+### Features
+
+- **3-Step Wizard**: Simplified flow from room creation to finalization.
+- **Cravings-Based Voting**: Users select their preferred cuisine before voting for specific venues.
+- **Availability Matching**: Interactive time-slot selection with group availability indicators.
+- **Interactive UI**: Real-time feedback on vote counts and selection states.
+
 ## Component Architecture
 
 - **DishCard**: A reusable card component prioritized for food photography and ratings.
