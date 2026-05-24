@@ -1,0 +1,149 @@
+.explore {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: #F5F5F5;
+  padding-bottom: 80px;
+}
+
+.explore__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  background: #F5F5F5;
+  position: relative;
+}
+
+.explore__back {
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #212121;
+  padding: 0;
+}
+
+.explore__back .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.explore__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #8b5001;
+  letter-spacing: 0.03em;
+}
+
+.explore__search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 20px 24px;
+  background: #fff;
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.explore__search-icon {
+  font-size: 20px;
+  color: #9E9E9E;
+  flex-shrink: 0;
+}
+
+.explore__search {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: #212121;
+  background: transparent;
+}
+
+.explore__search::placeholder {
+  color: #9E9E9E;
+}
+
+.explore__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 14px;
+}
+
+.explore__section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #212121;
+  margin: 0;
+}
+
+.explore__view-all {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8b5001;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 0;
+}
+
+.explore__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 20px;
+}
+
+.explore__card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border: 1px solid #F0F0F0;
+}
+
+.explore__card-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.explore__card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.explore__card-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #212121;
+}
+
+.explore__card-role {
+  font-size: 0.8rem;
+  color: #9E9E9E;
+}
+
+.explore__card-link {
+  background: none;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #8b5001;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0;
+}
