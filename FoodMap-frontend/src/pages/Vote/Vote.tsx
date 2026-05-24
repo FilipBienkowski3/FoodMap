@@ -8,6 +8,7 @@ import './Vote.css'
 export default function Vote() {
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
+  const [showSnackbar, setShowSnackbar] = useState(false)
 
   // Step 1 State
   const [roomName, setRoomName] = useState('')
@@ -73,8 +74,11 @@ export default function Vote() {
           onClick={() => {
             if (step < 3) setStep(step + 1);
             else {
-              alert('Vote Finalized!');
-              navigate(-1);
+              setShowSnackbar(true);
+              setTimeout(() => {
+                setShowSnackbar(false);
+                navigate(-1);
+              }, 2000);
             }
           }}
         >
@@ -84,6 +88,13 @@ export default function Vote() {
           <span className="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
+
+      {showSnackbar && (
+        <div className="vote-snackbar">
+          <span className="material-symbols-outlined">check_circle</span>
+          Vote Finalized!
+        </div>
+      )}
     </div>
   )
 }

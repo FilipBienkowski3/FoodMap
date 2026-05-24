@@ -13,6 +13,10 @@ export function Step1({ roomName, setRoomName, searchFriends, setSearchFriends }
         { id: 4, name: 'Emily', img: 'https://i.pravatar.cc/150?u=4', selected: false }
     ]
 
+    const filteredFriends = friends.filter(f =>
+        f.name.toLowerCase().includes(searchFriends.toLowerCase())
+    )
+
     return (
         <div>
             <h1 className="vote-title">Create a Room</h1>
@@ -42,7 +46,7 @@ export function Step1({ roomName, setRoomName, searchFriends, setSearchFriends }
             </div>
 
             <div className="vote-friends-row">
-                {friends.map(f => (
+                {filteredFriends.map(f => (
                     <div key={f.id} className={`vote-friend-item ${f.selected ? 'selected' : ''}`}>
                         <img src={f.img} alt={f.name} className="vote-friend-avatar" />
                         {f.selected && (
@@ -53,6 +57,9 @@ export function Step1({ roomName, setRoomName, searchFriends, setSearchFriends }
                         <span className="vote-friend-name">{f.name}</span>
                     </div>
                 ))}
+                {filteredFriends.length === 0 && (
+                    <p style={{ fontSize: '0.8rem', color: '#888', margin: '16px 0' }}>No friends found</p>
+                )}
             </div>
         </div>
     )
