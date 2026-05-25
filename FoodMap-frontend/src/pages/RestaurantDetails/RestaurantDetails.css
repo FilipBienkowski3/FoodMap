@@ -1,7 +1,7 @@
 .rd {
     min-height: 100dvh;
     background: #ffffff;
-    padding-bottom: 80px;
+    padding-bottom: 32px;
 }
 
 .rd__status {
@@ -203,6 +203,23 @@
     display: flex;
     gap: 14px;
     align-items: flex-start;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    text-align: left;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: background 0.15s ease;
+}
+
+.rd__menu-item:hover {
+    background: #faf6f1;
+}
+
+.rd__menu-item:active {
+    background: #f5ebe0;
 }
 
 .rd__menu-img {
@@ -286,6 +303,11 @@
     max-width: 320px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.rd__cta-link {
+    display: block;
+    text-decoration: none;
 }
 
 .rd__cta-btn {

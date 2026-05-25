@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getRestaurant } from '../../api/foodmapApi'
 import { RestaurantDishCard } from '../../components/restaurant/RestaurantDishCard/RestaurantDishCard'
 import { Button } from '../../components/common/Button/Button'
-import Navbar from '../../components/common/Navbar/Navbar'
-import { MENU_TABS, type MenuCategory, type Restaurant } from '../../constants/restaurant'
+import { MENU_TABS, menuItemReviewKey, type MenuCategory, type Restaurant } from '../../constants/restaurant'
+import { ROUTES, restaurantReviewRoute } from '../../constants/routes'
 import './RestaurantDetails.css'
 
 function isOpenNow(hours: string) {
@@ -50,7 +50,6 @@ export default function RestaurantDetails() {
     return (
       <div className="rd">
         <p className="rd__status">Loading...</p>
-        <Navbar />
       </div>
     )
   }
@@ -59,14 +58,13 @@ export default function RestaurantDetails() {
     return (
       <div className="rd">
         <header className="rd__topbar">
-          <button type="button" className="rd__icon-btn" onClick={() => nav(-1)} aria-label="Go back">
+          <button type="button" className="rd__icon-btn" onClick={() => nav(ROUTES.MAP)} aria-label="Go back">
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
           <span className="rd__topbar-title">Restaurant Details</span>
           <span className="rd__topbar-spacer" />
         </header>
         <p className="rd__status">{error || 'Restaurant not found'}</p>
-        <Navbar />
       </div>
     )
   }
@@ -77,7 +75,7 @@ export default function RestaurantDetails() {
   return (
     <div className="rd">
       <header className="rd__topbar">
-        <button type="button" className="rd__icon-btn" onClick={() => nav(-1)} aria-label="Go back">
+        <button type="button" className="rd__icon-btn" onClick={() => nav(ROUTES.MAP)} aria-label="Go back">
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
         <span className="rd__topbar-title">Restaurant Details</span>
@@ -110,7 +108,7 @@ export default function RestaurantDetails() {
           <p className="rd__section-sub">Our chef&apos;s highly recommended selections</p>
           <div className="rd__dish-list">
             {restaurant.topDishes.map(dish => (
-              <RestaurantDishCard key={dish.id} dish={dish} />
+              <RestaurantDishCard key={dish.id} dish={dish} restaurantId={restaurant.id} />
             ))}
           </div>
         </section>
@@ -131,27 +129,33 @@ export default function RestaurantDetails() {
           </nav>
           <ul className="rd__menu">
             {menuItems.map(item => (
-              <li key={item.id} className="rd__menu-item">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="rd__menu-img"
-                  loading="lazy"
-                />
-                <div className="rd__menu-body">
-                  <div className="rd__menu-header">
-                    <h3 className="rd__menu-name">{item.name}</h3>
-                    <span className="rd__menu-price">{item.price} zł</span>
-                  </div>
-                  <p className="rd__menu-desc">{item.description}</p>
-                  {item.tags && item.tags.length > 0 && (
-                    <div className="rd__menu-tags">
-                      {item.tags.map(tag => (
-                        <span key={tag} className="rd__menu-tag">{tag}</span>
-                      ))}
+              <li key={`${activeTab}-${item.id}`}>
+                <button
+                  type="button"
+                  className="rd__menu-item"
+                  onClick={() => nav(restaurantReviewRoute(restaurant.id, menuItemReviewKey(activeTab, item.id)))}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="rd__menu-img"
+                    loading="lazy"
+                  />
+                  <div className="rd__menu-body">
+                    <div className="rd__menu-header">
+                      <h3 className="rd__menu-name">{item.name}</h3>
+                      <span className="rd__menu-price">{item.price} zł</span>
                     </div>
-                  )}
-                </div>
+                    <p className="rd__menu-desc">{item.description}</p>
+                    {item.tags && item.tags.length > 0 && (
+                      <div className="rd__menu-tags">
+                        {item.tags.map(tag => (
+                          <span key={tag} className="rd__menu-tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </button>
               </li>
             ))}
           </ul>
@@ -162,13 +166,13 @@ export default function RestaurantDetails() {
           <p className="rd__cta-text">
             Share your experience with the community. Your feedback helps us maintain the {restaurant.name} standard.
           </p>
-          <Button variant="primary" fullWidth className="rd__cta-btn">
-            WRITE A REVIEW
-          </Button>
+          <Link to={restaurantReviewRoute(restaurant.id)} className="rd__cta-link">
+            <Button variant="primary" fullWidth className="rd__cta-btn">
+              WRITE A REVIEW
+            </Button>
+          </Link>
         </section>
       </div>
-
-      <Navbar />
     </div>
   )
 }

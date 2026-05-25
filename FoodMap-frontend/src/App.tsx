@@ -11,6 +11,7 @@ import Profile     from './pages/Profile/Profile'
 import Vote        from './pages/Vote/Vote'
 import UserProfile       from './pages/UserProfile/UserProfile'
 import RestaurantDetails from './pages/RestaurantDetails/RestaurantDetails'
+import Review            from './pages/Review/Review'
 import { ROUTES }        from './constants/routes'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -31,7 +32,8 @@ function AppRoutes() {
         <Route path={ROUTES.PROFILE}  element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path={ROUTES.VOTE}     element={<ProtectedRoute><Vote /></ProtectedRoute>} />
         <Route path={ROUTES.USER}       element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-        <Route path={ROUTES.RESTAURANT} element={<ProtectedRoute><RestaurantDetails /></ProtectedRoute>} />
+        <Route path={ROUTES.RESTAURANT_REVIEW} element={<ProtectedRoute><Review /></ProtectedRoute>} />
+        <Route path={ROUTES.RESTAURANT}       element={<ProtectedRoute><RestaurantDetails /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )

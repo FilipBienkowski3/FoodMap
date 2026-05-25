@@ -49,10 +49,10 @@ const IMG = {
   // Café Szafe
   cafeHero: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80',
   flatWhite: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80',
-  avocadoToast: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80',
+  avocadoToast: 'https://images.unsplash.com/photo-1772717737730-85eff61606c8?w=600&q=80',
   almondCroissant: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80',
   granolaBowl: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=80',
-  avocadoToastPlate: 'https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=600&q=80',
+  avocadoToastPlate: 'https://images.unsplash.com/photo-1761027101409-fa96d88349c7?w=600&q=80',
   shakshuka: 'https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?w=600&q=80',
   croissantPlate: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80',
   carrotCake: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80',
