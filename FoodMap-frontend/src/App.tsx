@@ -1,10 +1,12 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { useAuth } from './context/useAuth'
 import Home        from './pages/Home/Home'
 import Login       from './pages/Auth/Login/Login'
 import Register    from './pages/Auth/Register/Register'
-import Map         from './pages/Map/Map'
+
+const Map = lazy(() => import('./pages/Map/Map'))
 import Explore     from './pages/Explore/Explore'
 import Activity    from './pages/Activity/Activity'
 import Profile     from './pages/Profile/Profile'
@@ -26,7 +28,7 @@ function AppRoutes() {
         <Route path={ROUTES.HOME}     element={<Home />} />
         <Route path={ROUTES.LOGIN}    element={<Login />} />
         <Route path={ROUTES.REGISTER} element={<Register />} />
-        <Route path={ROUTES.MAP}      element={<ProtectedRoute><Map /></ProtectedRoute>} />
+        <Route path={ROUTES.MAP}      element={<ProtectedRoute><Suspense fallback={<div className="map-route-loading" />}><Map /></Suspense></ProtectedRoute>} />
         <Route path={ROUTES.EXPLORE}  element={<ProtectedRoute><Explore /></ProtectedRoute>} />
         <Route path={ROUTES.ACTIVITY} element={<ProtectedRoute><Activity /></ProtectedRoute>} />
         <Route path={ROUTES.PROFILE}  element={<ProtectedRoute><Profile /></ProtectedRoute>} />

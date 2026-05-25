@@ -1,3 +1,9 @@
+.map-route-loading {
+  flex: 1;
+  min-height: 100dvh;
+  background: var(--color-surface);
+}
+
 .mp {
   display: flex;
   flex-direction: column;

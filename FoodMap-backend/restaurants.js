@@ -234,7 +234,14 @@ const restaurants = [
 
 const MAP_FIELDS = ['id', 'lat', 'lng', 'icon', 'name', 'price', 'rating', 'hours', 'img']
 
-const toMapSpot = (restaurant) =>
-  Object.fromEntries(MAP_FIELDS.map(key => [key, restaurant[key]]))
+const toMapSpot = (restaurant) => {
+  const spot = Object.fromEntries(MAP_FIELDS.map(key => [key, restaurant[key]]))
+  if (typeof spot.img === 'string' && spot.img.includes('images.unsplash.com')) {
+    spot.img = spot.img.includes('w=')
+      ? spot.img.replace(/w=\d+/, 'w=320')
+      : `${spot.img}${spot.img.includes('?') ? '&' : '?'}w=320&q=75`
+  }
+  return spot
+}
 
 module.exports = { restaurants, toMapSpot }
