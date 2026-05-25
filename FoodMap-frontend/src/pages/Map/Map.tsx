@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, CircleMarker, useMapEvents } from 'react-leaflet'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../../constants/routes'
-import { getRestaurants } from '../../api/foodmapApi'
+import { ROUTES, restaurantRoute } from '../../constants/routes'
+import { getRestaurants, type MapSpot } from '../../api/foodmapApi'
 import Navbar from '../../components/common/Navbar/Navbar'
 import { Button } from '../../components/common/Button/Button'
 import { Input } from '../../components/common/Input/Input'
@@ -26,8 +26,6 @@ const makePinIcon = (icon: string, active = false) =>
     iconAnchor:  [22, 44],
     popupAnchor: [0, -50],
   })
-
-type Spot = { id: number; lat: number; lng: number; icon: string; name: string; price: number; rating: number; hours: string; img: string }
 
 function haversine(lat1: number, lng1: number, lat2: number, lng2: number) {
   const R = 6371
@@ -61,7 +59,7 @@ function MapClickDismiss({ onDismiss }: { onDismiss: () => void }) {
 
 export default function Map() {
   const nav = useNavigate()
-  const [spots, setSpots]           = useState<Spot[]>([])
+  const [spots, setSpots]           = useState<MapSpot[]>([])
   const [activePin, setActivePin]   = useState<number | null>(null)
   const [activeFilters, setFilters] = useState<Set<string>>(new Set())
   const [searchTag, setSearchTag]   = useState('')
@@ -118,10 +116,10 @@ export default function Map() {
     setShowTune(false)
   }
 
-  const dist = (spot: Spot) =>
+  const dist = (spot: MapSpot) =>
     userPos ? haversine(userPos.lat, userPos.lng, spot.lat, spot.lng) : 0
 
-  const fmtDist = (spot: Spot) =>
+  const fmtDist = (spot: MapSpot) =>
     userPos ? `${haversine(userPos.lat, userPos.lng, spot.lat, spot.lng).toFixed(1)} km` : '—'
 
   const visibleSpots = spots
@@ -161,7 +159,13 @@ export default function Map() {
               eventHandlers={{ click: (e) => { setActivePin(spot.id); e.target.openPopup() } }}
             >
               <Popup closeButton={false} className="mp__popup-wrap">
-                <div className="mp__card">
+                <div
+                  className="mp__card mp__card--clickable"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => nav(restaurantRoute(spot.id))}
+                  onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nav(restaurantRoute(spot.id)) } }}
+                >
                   <div className="mp__card-img-wrap">
                     <img src={spot.img} alt={spot.name} className="mp__card-img" />
                     <div className="mp__card-badge">

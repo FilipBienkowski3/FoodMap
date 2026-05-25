@@ -3,13 +3,15 @@ import Navbar from '../../components/common/Navbar/Navbar'
 import { Button } from '../../components/common/Button/Button'
 import { DishCard } from '../../components/common/DishCard/DishCard'
 import { useAuth } from '../../context/useAuth'
+import type { ProfileDish } from '../../data/users'
 import './Profile.css'
 
-const VISITED_DISHES = [
+const VISITED_DISHES: ProfileDish[] = [
   {
     id: 1,
     name: 'Tonkotsu Ramen',
     restaurant: 'Ramen Ichiraku',
+    restaurantId: 1,
     price: '$18',
     rating: 4.8,
     image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80',
@@ -17,10 +19,23 @@ const VISITED_DISHES = [
   {
     id: 2,
     name: 'Classic Margherita',
-    restaurant: "Luigi's Oven",
+    restaurant: 'Mamma Mia Pizza',
+    restaurantId: 2,
     price: '$22',
     rating: 4.5,
     image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80',
+  },
+]
+
+const WANT_DISHES: ProfileDish[] = [
+  {
+    id: 3,
+    name: 'Omakase Set',
+    restaurant: 'Sushi Kyo',
+    restaurantId: 3,
+    price: '$65',
+    rating: 4.9,
+    image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80',
   },
 ]
 
@@ -80,11 +95,9 @@ export default function Profile() {
           {activeTab === 'visited' && VISITED_DISHES.map(dish => (
             <DishCard key={dish.id} {...dish} />
           ))}
-          {activeTab === 'want' && (
-            <p style={{ textAlign: 'center', color: '#6b6b6b', marginTop: '20px' }}>
-              No dishes in your wishlist yet.
-            </p>
-          )}
+          {activeTab === 'want' && WANT_DISHES.map(dish => (
+            <DishCard key={dish.id} {...dish} />
+          ))}
         </div>
       </div>
       <Navbar />

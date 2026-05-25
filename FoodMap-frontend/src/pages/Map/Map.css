@@ -250,6 +250,19 @@
 
 .mp__card { display: flex; flex-direction: column; }
 
+.mp__card--clickable {
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.mp__card--clickable:hover {
+  transform: scale(1.02);
+}
+
+.mp__card--clickable:active {
+  transform: scale(0.98);
+}
+
 .mp__card-img-wrap {
   position: relative;
   height: 96px;
