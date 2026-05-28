@@ -47,6 +47,24 @@
     margin-bottom: 12px;
 }
 
+.dish-card__restaurant--link {
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    text-align: left;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.dish-card__restaurant--link:hover {
+    opacity: 0.85;
+}
+
 .dish-card__rating {
     display: flex;
     align-items: center;

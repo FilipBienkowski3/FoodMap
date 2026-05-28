@@ -13,7 +13,8 @@ export default function AuthCard({ children }: Props) {
   return (
     <div className="auth-card">
       <button className="auth-card__back" onClick={() => nav(ROUTES.HOME)}>
-        ← {APP_NAME}
+        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="auth-card__back-logo">{APP_NAME}</span>
       </button>
       {children}
     </div>
