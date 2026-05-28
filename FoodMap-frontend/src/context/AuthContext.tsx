@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { auth } from '../config/firebase'
+import { prefetchRestaurants } from '../api/foodmapApi'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 
 interface User {
@@ -30,6 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           name: firebaseUser.displayName,
           email: firebaseUser.email
         })
+        prefetchRestaurants()
       } else {
         setUser(null)
       }

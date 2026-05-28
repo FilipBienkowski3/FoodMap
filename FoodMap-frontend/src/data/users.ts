@@ -1,3 +1,15 @@
+// Dishes and restaurants must match FoodMap-backend/restaurants.js
+
+export type ProfileDish = {
+  id: number
+  name: string
+  restaurant: string
+  restaurantId: number
+  price: string
+  rating: number
+  image: string
+}
+
 export type UserProfile = {
   id: string
   name: string
@@ -6,22 +18,8 @@ export type UserProfile = {
   role: string
   avatar: string
   badges: string[]
-  visitedDishes: {
-    id: number
-    name: string
-    restaurant: string
-    price: string
-    rating: number
-    image: string
-  }[]
-  wantDishes: {
-    id: number
-    name: string
-    restaurant: string
-    price: string
-    rating: number
-    image: string
-  }[]
+  visitedDishes: ProfileDish[]
+  wantDishes: ProfileDish[]
   friendsActivity: {
     id: number
     avatar: string
@@ -44,31 +42,34 @@ export const MOCK_USERS: UserProfile[] = [
         id: 1,
         name: 'Tonkotsu Ramen',
         restaurant: 'Ramen Ichiraku',
-        price: '$16.00',
-        rating: 4.8,
-        image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80',
+        restaurantId: 1,
+        price: '42 zł',
+        rating: 4.9,
+        image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80',
       },
       {
         id: 2,
         name: 'Spicy Miso Ramen',
-        restaurant: 'Noodle House',
-        price: '$14.00',
-        rating: 4.6,
-        image: 'https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&w=800&q=80',
+        restaurant: 'Ramen Ichiraku',
+        restaurantId: 1,
+        price: '44 zł',
+        rating: 4.8,
+        image: 'https://images.unsplash.com/photo-1535140728325-a4d3707eee61?w=800&q=80',
       },
     ],
     wantDishes: [
       {
         id: 3,
-        name: 'Tsukemen',
-        restaurant: 'Tokyo Dip Bar',
-        price: '$18.00',
-        rating: 4.9,
-        image: 'https://images.unsplash.com/photo-1623341214825-9f4f963727da?auto=format&fit=crop&w=800&q=80',
+        name: 'Shoyu Ramen',
+        restaurant: 'Ramen Ichiraku',
+        restaurantId: 1,
+        price: '40 zł',
+        rating: 4.7,
+        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
       },
     ],
     friendsActivity: [
-      { id: 1, avatar: 'https://i.pravatar.cc/40?img=5', text: 'Sarah M. reviewed Spicy Tuna Roll at Sushi Spot', rating: 4.2 },
+      { id: 1, avatar: 'https://i.pravatar.cc/40?img=5', text: 'Sarah M. reviewed Dragon Roll at Sushi Kyo', rating: 4.8 },
     ],
   },
   {
@@ -82,24 +83,26 @@ export const MOCK_USERS: UserProfile[] = [
     visitedDishes: [
       {
         id: 1,
-        name: 'Spicy Tuna Roll',
-        restaurant: 'Sushi Spot',
-        price: '$14.00',
-        rating: 4.2,
-        image: 'https://images.unsplash.com/photo-1617196034183-421b4040ed20?auto=format&fit=crop&w=800&q=80',
+        name: 'Dragon Roll',
+        restaurant: 'Sushi Kyo',
+        restaurantId: 3,
+        price: '48 zł',
+        rating: 4.8,
+        image: 'https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=800&q=80',
       },
       {
         id: 2,
-        name: 'Salmon Sashimi',
-        restaurant: 'Omakase',
-        price: '$22.00',
+        name: 'Chirashi Bowl',
+        restaurant: 'Sushi Kyo',
+        restaurantId: 3,
+        price: '58 zł',
         rating: 4.9,
-        image: 'https://images.unsplash.com/photo-1535140728325-a4d3707eee61?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1535140728325-a4d3707eee61?w=800&q=80',
       },
     ],
     wantDishes: [],
     friendsActivity: [
-      { id: 1, avatar: 'https://i.pravatar.cc/40?img=11', text: 'David L. tried Tonkotsu Ramen at Ramen Ichiraku', rating: 4.8 },
+      { id: 1, avatar: 'https://i.pravatar.cc/40?img=11', text: 'David L. tried Tonkotsu Ramen at Ramen Ichiraku', rating: 4.9 },
     ],
   },
   {
@@ -115,39 +118,43 @@ export const MOCK_USERS: UserProfile[] = [
         id: 1,
         name: 'Tonkotsu Ramen',
         restaurant: 'Ramen Ichiraku',
-        price: '$16.00',
-        rating: 4.8,
-        image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80',
+        restaurantId: 1,
+        price: '42 zł',
+        rating: 4.9,
+        image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80',
       },
       {
         id: 2,
-        name: 'Artisan Sourdough',
-        restaurant: 'Bread & Co.',
-        price: '$3.50',
-        rating: 4.9,
-        image: 'https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=800&q=80',
+        name: 'Almond Croissant',
+        restaurant: 'Café Szafe',
+        restaurantId: 5,
+        price: '12 zł',
+        rating: 4.6,
+        image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80',
       },
       {
         id: 3,
-        name: 'Matcha Latte',
-        restaurant: 'Green Leaf Cafe',
-        price: '$6.00',
+        name: 'Flat White',
+        restaurant: 'Café Szafe',
+        restaurantId: 5,
+        price: '14 zł',
         rating: 4.5,
-        image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
       },
     ],
     wantDishes: [
       {
         id: 4,
-        name: 'Kouign-Amann',
-        restaurant: 'French Patisserie',
-        price: '$5.50',
+        name: 'Midnight Ganache',
+        restaurant: 'Wierzynek',
+        restaurantId: 4,
+        price: '36 zł',
         rating: 4.7,
-        image: 'https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80',
       },
     ],
     friendsActivity: [
-      { id: 1, avatar: 'https://i.pravatar.cc/40?img=11', text: 'David L. reviewed Spicy Tuna Roll at Sushi Spot', rating: 4.2 },
+      { id: 1, avatar: 'https://i.pravatar.cc/40?img=11', text: 'David L. reviewed Dragon Roll at Sushi Kyo', rating: 4.8 },
     ],
   },
   {
@@ -162,32 +169,35 @@ export const MOCK_USERS: UserProfile[] = [
       {
         id: 1,
         name: 'Flat White',
-        restaurant: 'Brew & Roast',
-        price: '$5.00',
-        rating: 4.7,
-        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80',
+        restaurant: 'Café Szafe',
+        restaurantId: 5,
+        price: '14 zł',
+        rating: 4.5,
+        image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
       },
       {
         id: 2,
         name: 'Avocado Toast',
-        restaurant: 'Morning Glory',
-        price: '$12.00',
+        restaurant: 'Café Szafe',
+        restaurantId: 5,
+        price: '28 zł',
         rating: 4.4,
-        image: 'https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1772717737730-85eff61606c8?w=800&q=80',
       },
     ],
     wantDishes: [
       {
         id: 3,
-        name: 'Birria Tacos',
-        restaurant: 'El Fuego',
-        price: '$11.00',
-        rating: 4.9,
-        image: 'https://images.unsplash.com/photo-1613514785940-daed07799d9b?auto=format&fit=crop&w=800&q=80',
+        name: 'Margherita DOC',
+        restaurant: 'Mamma Mia Pizza',
+        restaurantId: 2,
+        price: '32 zł',
+        rating: 4.6,
+        image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80',
       },
     ],
     friendsActivity: [
-      { id: 1, avatar: 'https://i.pravatar.cc/40?img=5', text: 'Sarah M. tried Salmon Sashimi at Omakase', rating: 4.9 },
+      { id: 1, avatar: 'https://i.pravatar.cc/40?img=5', text: 'Sarah M. tried Chirashi Bowl at Sushi Kyo', rating: 4.9 },
     ],
   },
 ]

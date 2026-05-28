@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, CircleMarker, useMapEvents } from 'react-leaflet'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../../constants/routes'
-import { getRestaurants } from '../../api/foodmapApi'
+import { ROUTES, restaurantRoute } from '../../constants/routes'
+import { KRAKOW_CENTER, MAP_TILE_ATTRIBUTION, MAP_TILE_URL } from '../../constants/map'
+import { getRestaurants, readRestaurantsCache, type MapSpot } from '../../api/foodmapApi'
 import Navbar from '../../components/common/Navbar/Navbar'
 import { Button } from '../../components/common/Button/Button'
 import { Input } from '../../components/common/Input/Input'
@@ -10,13 +11,6 @@ import { Label } from '../../components/common/Label/Label'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import './Map.css'
-
-delete (L.Icon.Default.prototype as any)._getIconUrl
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl:       'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl:     'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-})
 
 const makePinIcon = (icon: string, active = false) =>
   L.divIcon({
@@ -26,8 +20,6 @@ const makePinIcon = (icon: string, active = false) =>
     iconAnchor:  [22, 44],
     popupAnchor: [0, -50],
   })
-
-type Spot = { id: number; lat: number; lng: number; icon: string; name: string; price: number; rating: number; hours: string; img: string }
 
 function haversine(lat1: number, lng1: number, lat2: number, lng2: number) {
   const R = 6371
@@ -61,13 +53,13 @@ function MapClickDismiss({ onDismiss }: { onDismiss: () => void }) {
 
 export default function Map() {
   const nav = useNavigate()
-  const [spots, setSpots]           = useState<Spot[]>([])
+  const [spots, setSpots]           = useState<MapSpot[]>(() => readRestaurantsCache() ?? [])
   const [activePin, setActivePin]   = useState<number | null>(null)
   const [activeFilters, setFilters] = useState<Set<string>>(new Set())
   const [searchTag, setSearchTag]   = useState('')
   const [query, setQuery]           = useState('')
   const [userPos, setUserPos]         = useState<{ lat: number; lng: number } | null>(null)
-  const [mapCenter, setMapCenter]     = useState<[number, number] | null>(null)
+  const [mapCenter, setMapCenter]     = useState<[number, number]>(KRAKOW_CENTER)
   const [showTune, setShowTune]       = useState(false)
   const [priceInput, setPriceInput]   = useState('60')
   const [distInput, setDistInput]     = useState('2')
@@ -77,17 +69,24 @@ export default function Map() {
   useEffect(() => { getRestaurants().then(setSpots) }, [])
 
   useEffect(() => {
-    const fallback = setTimeout(() => setMapCenter([50.0619, 19.9372]), 5000)
+    if (!navigator.geolocation) return
     navigator.geolocation.getCurrentPosition(
       p => {
-        clearTimeout(fallback)
         setUserPos({ lat: p.coords.latitude, lng: p.coords.longitude })
         setMapCenter([p.coords.latitude, p.coords.longitude])
       },
-      () => { clearTimeout(fallback); setMapCenter([50.0619, 19.9372]) },
-      { timeout: 5000 }
+      () => {},
+      { timeout: 10000, maximumAge: 120000, enableHighAccuracy: false }
     )
-    return () => clearTimeout(fallback)
+  }, [])
+
+  const pinIcons = useMemo(() => {
+    const cache: Record<string, L.DivIcon> = {}
+    return (icon: string, active: boolean) => {
+      const key = `${icon}:${active}`
+      if (!cache[key]) cache[key] = makePinIcon(icon, active)
+      return cache[key]
+    }
   }, [])
 
   const toggleFilter = (label: string) => {
@@ -118,10 +117,10 @@ export default function Map() {
     setShowTune(false)
   }
 
-  const dist = (spot: Spot) =>
+  const dist = (spot: MapSpot) =>
     userPos ? haversine(userPos.lat, userPos.lng, spot.lat, spot.lng) : 0
 
-  const fmtDist = (spot: Spot) =>
+  const fmtDist = (spot: MapSpot) =>
     userPos ? `${haversine(userPos.lat, userPos.lng, spot.lat, spot.lng).toFixed(1)} km` : '—'
 
   const visibleSpots = spots
@@ -140,11 +139,8 @@ export default function Map() {
   return (
     <div className="mp">
       <main className="mp__canvas">
-        {mapCenter && <MapContainer center={mapCenter} zoom={userPos ? 15 : 14} className="mp__leaflet" zoomControl={false}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+        <MapContainer center={mapCenter} zoom={userPos ? 15 : 14} className="mp__leaflet" zoomControl={false}>
+          <TileLayer attribution={MAP_TILE_ATTRIBUTION} url={MAP_TILE_URL} />
           <MapClickDismiss onDismiss={() => setActivePin(null)} />
           {userPos && (
             <CircleMarker
@@ -157,13 +153,19 @@ export default function Map() {
             <Marker
               key={spot.id}
               position={[spot.lat, spot.lng]}
-              icon={makePinIcon(spot.icon, activePin === spot.id)}
+              icon={pinIcons(spot.icon, activePin === spot.id)}
               eventHandlers={{ click: (e) => { setActivePin(spot.id); e.target.openPopup() } }}
             >
               <Popup closeButton={false} className="mp__popup-wrap">
-                <div className="mp__card">
+                <div
+                  className="mp__card mp__card--clickable"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => nav(restaurantRoute(spot.id))}
+                  onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nav(restaurantRoute(spot.id)) } }}
+                >
                   <div className="mp__card-img-wrap">
-                    <img src={spot.img} alt={spot.name} className="mp__card-img" />
+                    <img src={spot.img} alt={spot.name} className="mp__card-img" loading="lazy" decoding="async" />
                     <div className="mp__card-badge">
                       <span className="material-symbols-outlined mp__card-star">star</span>
                       {spot.rating}
@@ -181,7 +183,7 @@ export default function Map() {
               </Popup>
             </Marker>
           ))}
-        </MapContainer>}
+        </MapContainer>
 
         <div className="mp__float">
           <div className="mp__search">

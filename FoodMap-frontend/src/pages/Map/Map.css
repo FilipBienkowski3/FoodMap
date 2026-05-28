@@ -1,3 +1,9 @@
+.map-route-loading {
+  flex: 1;
+  min-height: 100dvh;
+  background: var(--color-surface);
+}
+
 .mp {
   display: flex;
   flex-direction: column;
@@ -249,6 +255,19 @@
 .mp__popup-wrap .leaflet-popup-tip-container { display: none; }
 
 .mp__card { display: flex; flex-direction: column; }
+
+.mp__card--clickable {
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.mp__card--clickable:hover {
+  transform: scale(1.02);
+}
+
+.mp__card--clickable:active {
+  transform: scale(0.98);
+}
 
 .mp__card-img-wrap {
   position: relative;
