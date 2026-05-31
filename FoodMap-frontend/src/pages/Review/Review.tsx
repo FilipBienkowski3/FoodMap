@@ -4,6 +4,7 @@ import { getRestaurant } from '../../api/foodmapApi'
 import { Button } from '../../components/common/Button/Button'
 import { getReviewDishes, type ReviewDishOption } from '../../constants/restaurant'
 import { useAuth } from '../../context/useAuth'
+import { trackEvent } from '../../config/analytics'
 import './Review.css'
 
 export default function Review() {
@@ -82,6 +83,7 @@ export default function Review() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitted(true)
+    trackEvent('review', 'review_submitted', `rating=${rating}`)
     setTimeout(() => nav(-1), 600)
   }
 

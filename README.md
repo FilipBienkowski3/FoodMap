@@ -63,6 +63,31 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 ```
 
+
+## Google Analytics
+
+The application integrates **Google Analytics** for user behavior analysis, using the `react-ga4` library wired into the SPA router.
+
+### Configuration
+
+To enable Google Analytics add the following evironmental variable to the `FoodMap-frontend/.env`:
+
+```env
+VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+### What is collected
+
+- **Page views** — every screen the user visits, tracked with a readable title (Home, Map, Restaurant Details, etc.) on each route change.
+- **Authentication** — successful and failed logins and registrations (Email / Google), plus logout.
+- **Map interactions** — dish searches, filter usage, restaurant pin clicks, and starting a group vote.
+- **Restaurant engagement** — viewing a restaurant, marking favorites, and starting a review.
+- **Reviews** — review submissions together with the selected rating.
+- **Group voting** — progressing through the vote wizard and finalizing a vote.
+- **Social & profile** — viewing other users' profiles and switching profile tabs.
+- **Automatic GA4 signals** — sessions, first visits, scrolls, engagement time, and session metadata (device, browser, country, referral source).
+
+
 ### Implementation Details
 
 - `AuthContext.tsx`: Provides the authentication state (`user`, `loading`) and `logout` function to the entire application.

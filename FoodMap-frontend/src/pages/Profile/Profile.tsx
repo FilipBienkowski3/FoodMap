@@ -3,6 +3,7 @@ import Navbar from '../../components/common/Navbar/Navbar'
 import { Button } from '../../components/common/Button/Button'
 import { DishCard } from '../../components/common/DishCard/DishCard'
 import { useAuth } from '../../context/useAuth'
+import { trackEvent } from '../../config/analytics'
 import type { ProfileDish } from '../../data/users'
 import './Profile.css'
 
@@ -79,13 +80,13 @@ export default function Profile() {
         <nav className="profile__tabs">
           <button
             className={`profile__tab ${activeTab === 'visited' ? 'profile__tab--active' : ''}`}
-            onClick={() => setActiveTab('visited')}
+            onClick={() => { setActiveTab('visited'); trackEvent('profile', 'tab_switch', 'visited') }}
           >
             Visited
           </button>
           <button
             className={`profile__tab ${activeTab === 'want' ? 'profile__tab--active' : ''}`}
-            onClick={() => setActiveTab('want')}
+            onClick={() => { setActiveTab('want'); trackEvent('profile', 'tab_switch', 'want_to_visit') }}
           >
             Want to Visit
           </button>

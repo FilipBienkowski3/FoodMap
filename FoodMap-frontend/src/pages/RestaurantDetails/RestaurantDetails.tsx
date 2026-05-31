@@ -5,6 +5,7 @@ import { RestaurantDishCard } from '../../components/restaurant/RestaurantDishCa
 import { Button } from '../../components/common/Button/Button'
 import { MENU_TABS, menuItemReviewKey, type MenuCategory, type Restaurant } from '../../constants/restaurant'
 import { ROUTES, restaurantReviewRoute } from '../../constants/routes'
+import { trackEvent } from '../../config/analytics'
 import './RestaurantDetails.css'
 
 function isOpenNow(hours: string) {
@@ -41,7 +42,10 @@ export default function RestaurantDetails() {
     setLoading(true)
     setError('')
     getRestaurant(restaurantId)
-      .then(setRestaurant)
+      .then(data => {
+        setRestaurant(data)
+        trackEvent('restaurant', 'view_restaurant', data.name)
+      })
       .catch(() => setError('Could not load restaurant'))
       .finally(() => setLoading(false))
   }, [id])
@@ -82,7 +86,7 @@ export default function RestaurantDetails() {
         <button
           type="button"
           className={`rd__icon-btn rd__favorite${favorite ? ' rd__favorite--active' : ''}`}
-          onClick={() => setFavorite(v => !v)}
+          onClick={() => setFavorite(v => { trackEvent('restaurant', v ? 'remove_favorite' : 'add_favorite', restaurant.name); return !v })}
           aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
         >
           <span className="material-symbols-outlined">{favorite ? 'favorite' : 'favorite_border'}</span>
@@ -166,7 +170,7 @@ export default function RestaurantDetails() {
           <p className="rd__cta-text">
             Share your experience with the community. Your feedback helps us maintain the {restaurant.name} standard.
           </p>
-          <Link to={restaurantReviewRoute(restaurant.id)} className="rd__cta-link">
+          <Link to={restaurantReviewRoute(restaurant.id)} className="rd__cta-link" onClick={() => trackEvent('restaurant', 'start_review', restaurant.name)}>
             <Button variant="primary" fullWidth className="rd__cta-btn">
               WRITE A REVIEW
             </Button>

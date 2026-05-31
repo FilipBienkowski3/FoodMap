@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from '../../components/common/Navbar/Navbar'
 import { MOCK_USERS } from '../../data/users'
 import { userRoute } from '../../constants/routes'
+import { trackEvent } from '../../config/analytics'
 import './Explore.css'
 
 export default function Explore() {
@@ -48,7 +49,7 @@ export default function Explore() {
             </div>
             <button
               className="explore__card-link"
-              onClick={() => nav(userRoute(user.id))}
+              onClick={() => { trackEvent('explore', 'view_user_profile', user.name); nav(userRoute(user.id)) }}
             >
               View Profile
             </button>
