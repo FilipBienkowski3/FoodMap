@@ -69,7 +69,9 @@
   border-radius: 16px;
   padding: 14px 16px;
   position: relative;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
 }
 
 .activity__card--unread {
@@ -153,7 +155,7 @@
 .activity__star {
   font-size: 14px !important;
   color: #f5a623;
-  font-variation-settings: 'FILL' 1;
+  font-variation-settings: "FILL" 1;
 }
 
 .activity__time {
