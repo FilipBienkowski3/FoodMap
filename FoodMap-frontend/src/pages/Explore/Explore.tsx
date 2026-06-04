@@ -24,37 +24,39 @@ export default function Explore() {
         <span className="explore__title">FoodMap</span>
       </header>
 
-      <div className="explore__search-wrap">
-        <span className="material-symbols-outlined explore__search-icon">search</span>
-        <input
-          className="explore__search"
-          placeholder="Search for friends..."
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-        />
-      </div>
+      <div className="explore__content">
+        <div className="explore__search-wrap">
+          <span className="material-symbols-outlined explore__search-icon">search</span>
+          <input
+            className="explore__search"
+            placeholder="Search for friends..."
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+          />
+        </div>
 
-      <div className="explore__section-header">
-        <h2 className="explore__section-title">Suggested Friends</h2>
-        <button className="explore__view-all">VIEW ALL</button>
-      </div>
+        <div className="explore__section-header">
+          <h2 className="explore__section-title">Suggested Friends</h2>
+          <button className="explore__view-all">VIEW ALL</button>
+        </div>
 
-      <div className="explore__list">
-        {filtered.map(user => (
-          <div key={user.id} className="explore__card">
-            <img src={user.avatar} alt={user.name} className="explore__card-avatar" />
-            <div className="explore__card-info">
-              <span className="explore__card-name">{user.name}</span>
-              <span className="explore__card-role">{user.role}</span>
+        <div className="explore__list">
+          {filtered.map(user => (
+            <div key={user.id} className="explore__card">
+              <img src={user.avatar} alt={user.name} className="explore__card-avatar" />
+              <div className="explore__card-info">
+                <span className="explore__card-name">{user.name}</span>
+                <span className="explore__card-role">{user.role}</span>
+              </div>
+              <button
+                className="explore__card-link"
+                onClick={() => { trackEvent('explore', 'view_user_profile', user.name); nav(userRoute(user.id)) }}
+              >
+                View Profile
+              </button>
             </div>
-            <button
-              className="explore__card-link"
-              onClick={() => { trackEvent('explore', 'view_user_profile', user.name); nav(userRoute(user.id)) }}
-            >
-              View Profile
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <Navbar />

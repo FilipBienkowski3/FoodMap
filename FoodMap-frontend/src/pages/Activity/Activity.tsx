@@ -172,17 +172,10 @@ export default function Activity() {
   return (
     <div className="activity">
       <header className="activity__header">
-        <div className="activity__title-wrap">
-          <h1 className="activity__title">Activity</h1>
-          {unreadCount > 0 && <span className="activity__count">{unreadCount} new</span>}
-        </div>
-        <button
-          className="activity__read-all"
-          onClick={markAllRead}
-          disabled={unreadCount === 0}
-        >
-          Mark all read
+        <button className="activity__back" onClick={() => nav(-1)}>
+          <span className="material-symbols-outlined">arrow_back</span>
         </button>
+        <span className="activity__title">FoodMap</span>
       </header>
 
       <div className="activity__scroll">
