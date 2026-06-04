@@ -1,9 +1,27 @@
 .explore {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100dvh;
   background: #F5F5F5;
+  overflow: hidden;
+}
+
+.explore__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  background: #F5F5F5;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.explore__content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   padding-bottom: 80px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .explore__header {
