@@ -2,12 +2,14 @@ import { createContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { auth } from '../config/firebase'
 import { prefetchRestaurants } from '../api/foodmapApi'
+import { trackEvent } from '../config/analytics'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 
 interface User {
   id: string
   name: string | null
   email: string | null
+  photoURL?: string | null
 }
 
 interface AuthContextType {
@@ -29,7 +31,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser({
           id: firebaseUser.uid,
           name: firebaseUser.displayName,
-          email: firebaseUser.email
+          email: firebaseUser.email,
+          photoURL: firebaseUser.photoURL
         })
         prefetchRestaurants()
       } else {
@@ -42,6 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = (u: User) => setUser(u)
   const logout = async () => {
+    trackEvent('auth', 'logout')
     await signOut(auth)
     setUser(null)
   }

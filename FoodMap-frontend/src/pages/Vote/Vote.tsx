@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Step1 } from './Step1'
 import { Step2 } from './Step2'
 import { Step3 } from './Step3'
+import { trackEvent } from '../../config/analytics'
 import './Vote.css'
 
 export default function Vote() {
@@ -72,8 +73,11 @@ export default function Vote() {
         <button
           className="vote-btn-primary"
           onClick={() => {
-            if (step < 3) setStep(step + 1);
-            else {
+            if (step < 3) {
+              trackEvent('vote', 'step_completed', `step_${step}`);
+              setStep(step + 1);
+            } else {
+              trackEvent('vote', 'vote_finalized', `${selectedCraving} / ${votedVenue} / ${selectedTime}`);
               setShowSnackbar(true);
               setTimeout(() => {
                 setShowSnackbar(false);

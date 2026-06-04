@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { useAuth } from './context/useAuth'
+import { usePageTracking } from './hooks/usePageTracking'
 import Home        from './pages/Home/Home'
 import Login       from './pages/Auth/Login/Login'
 import Register    from './pages/Auth/Register/Register'
@@ -21,9 +22,15 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return user ? <>{children}</> : <Navigate to={ROUTES.LOGIN} replace />
 }
 
+function RouteTracker() {
+  usePageTracking()
+  return null
+}
+
 function AppRoutes() {
   return (
     <BrowserRouter>
+      <RouteTracker />
       <Routes>
         <Route path={ROUTES.HOME}     element={<Home />} />
         <Route path={ROUTES.LOGIN}    element={<Login />} />

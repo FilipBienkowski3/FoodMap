@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../config/firebase'
+import { trackEvent } from '../../../config/analytics'
 import { useAuth } from '../../../context/useAuth'
 import { Button } from '../../../components/common/Button/Button'
 import { Label } from '../../../components/common/Label/Label'
@@ -28,8 +29,10 @@ export default function Register() {
       const { user } = await createUserWithEmailAndPassword(auth, email, password)
       await updateProfile(user, { displayName: name })
       login({ id: user.uid, name, email: user.email })
+      trackEvent('auth', 'sign_up', 'email')
       nav(ROUTES.HOME)
     } catch (err: unknown) {
+      trackEvent('auth', 'sign_up_failed', 'email')
       setError(err instanceof Error ? err.message : 'Connection error')
     } finally {
       setLoading(false)
@@ -40,8 +43,10 @@ export default function Register() {
     setError('')
     try {
       await signInWithPopup(auth, new GoogleAuthProvider())
+      trackEvent('auth', 'sign_up', 'google')
       nav(ROUTES.HOME)
     } catch (err: unknown) {
+      trackEvent('auth', 'sign_up_failed', 'google')
       if (err instanceof Error) setError(err.message)
     }
   }

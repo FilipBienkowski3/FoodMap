@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTES, restaurantRoute } from '../../constants/routes'
 import { KRAKOW_CENTER, MAP_TILE_ATTRIBUTION, MAP_TILE_URL } from '../../constants/map'
 import { getRestaurants, readRestaurantsCache, type MapSpot } from '../../api/foodmapApi'
+import { trackEvent } from '../../config/analytics'
 import Navbar from '../../components/common/Navbar/Navbar'
 import { Button } from '../../components/common/Button/Button'
 import { Input } from '../../components/common/Input/Input'
@@ -96,6 +97,7 @@ export default function Map() {
         next.delete(label)
       } else {
         next.add(label)
+        trackEvent('map', 'filter_applied', label)
         if (label === 'Price') {
           const p = parseFloat(priceInput)
           setPriceLimit(!isNaN(p) && p > 0 ? p : null)
@@ -115,6 +117,7 @@ export default function Map() {
     setPriceLimit(!isNaN(p) && p > 0 ? p : null)
     setDistLimit(!isNaN(d) && d > 0 ? d : null)
     setShowTune(false)
+    trackEvent('map', 'tune_applied', `price=${priceInput};dist=${distInput}`)
   }
 
   const dist = (spot: MapSpot) =>
@@ -130,10 +133,13 @@ export default function Map() {
     .filter(s => !activeFilters.has('Price')    || priceLimit === null || s.price <= priceLimit)
     .filter(s => !activeFilters.has('Distance') || distLimit === null  || (userPos !== null && dist(s) <= distLimit))
 
+  const runSearch = (term: string) => {
+    setSearchTag(term); setQuery(''); setActivePin(null)
+    trackEvent('map', 'search', term)
+  }
+
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && query.trim()) {
-      setSearchTag(query.trim()); setQuery(''); setActivePin(null)
-    }
+    if (e.key === 'Enter' && query.trim()) runSearch(query.trim())
   }
 
   return (
@@ -154,7 +160,7 @@ export default function Map() {
               key={spot.id}
               position={[spot.lat, spot.lng]}
               icon={pinIcons(spot.icon, activePin === spot.id)}
-              eventHandlers={{ click: (e) => { setActivePin(spot.id); e.target.openPopup() } }}
+              eventHandlers={{ click: (e) => { setActivePin(spot.id); e.target.openPopup(); trackEvent('map', 'map_pin_click', spot.name) } }}
             >
               <Popup closeButton={false} className="mp__popup-wrap">
                 <div
@@ -187,7 +193,7 @@ export default function Map() {
 
         <div className="mp__float">
           <div className="mp__search">
-            <Button variant="none" className="mp__search-icon-btn" onClick={() => { if (query.trim()) { setSearchTag(query.trim()); setQuery(''); setActivePin(null) } }}>
+            <Button variant="none" className="mp__search-icon-btn" onClick={() => { if (query.trim()) runSearch(query.trim()) }}>
               <span className="material-symbols-outlined mp__search-icon">search</span>
             </Button>
             {searchTag && (
@@ -262,7 +268,7 @@ export default function Map() {
         </div>
 
         <div className="mp__fab-wrap">
-          <Button variant="none" className="mp__fab" onClick={() => nav(ROUTES.VOTE)}>
+          <Button variant="none" className="mp__fab" onClick={() => { trackEvent('map', 'start_group_vote'); nav(ROUTES.VOTE) }}>
             <span className="material-symbols-outlined">groups</span>
             Start Group Vote
           </Button>

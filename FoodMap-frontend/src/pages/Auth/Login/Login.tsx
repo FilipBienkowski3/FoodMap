@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../config/firebase'
+import { trackEvent } from '../../../config/analytics'
 import { Button } from '../../../components/common/Button/Button'
 import { Label } from '../../../components/common/Label/Label'
 import { Input } from '../../../components/common/Input/Input'
@@ -21,8 +22,10 @@ export default function Login() {
     setError('')
     try {
       await signInWithEmailAndPassword(auth, email, password)
+      trackEvent('auth', 'login', 'email')
       nav(ROUTES.HOME)
     } catch (err: unknown) {
+      trackEvent('auth', 'login_failed', 'email')
       if (err instanceof Error) setError(err.message || 'Log in error')
     } finally {
       setLoading(false)
@@ -32,8 +35,10 @@ export default function Login() {
   const handleGoogle = async () => {
     try {
       await signInWithPopup(auth, new GoogleAuthProvider())
+      trackEvent('auth', 'login', 'google')
       nav(ROUTES.HOME)
     } catch (err: unknown) {
+      trackEvent('auth', 'login_failed', 'google')
       if (err instanceof Error) setError(err.message)
     }
   }
