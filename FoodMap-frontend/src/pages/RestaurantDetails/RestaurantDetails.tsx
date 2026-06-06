@@ -4,7 +4,7 @@ import { getRestaurant } from '../../api/foodmapApi'
 import { RestaurantDishCard } from '../../components/restaurant/RestaurantDishCard/RestaurantDishCard'
 import { Button } from '../../components/common/Button/Button'
 import { MENU_TABS, menuItemReviewKey, type MenuCategory, type Restaurant } from '../../constants/restaurant'
-import { ROUTES, restaurantReviewRoute } from '../../constants/routes'
+import { restaurantReviewRoute } from '../../constants/routes'
 import { trackEvent } from '../../config/analytics'
 import './RestaurantDetails.css'
 
@@ -62,7 +62,7 @@ export default function RestaurantDetails() {
     return (
       <div className="rd">
         <header className="rd__topbar">
-          <button type="button" className="rd__icon-btn" onClick={() => nav(ROUTES.MAP)} aria-label="Go back">
+          <button type="button" className="rd__icon-btn" onClick={() => nav(-1)} aria-label="Go back">
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
           <span className="rd__topbar-title">Restaurant Details</span>
@@ -79,7 +79,7 @@ export default function RestaurantDetails() {
   return (
     <div className="rd">
       <header className="rd__topbar">
-        <button type="button" className="rd__icon-btn" onClick={() => nav(ROUTES.MAP)} aria-label="Go back">
+        <button type="button" className="rd__icon-btn" onClick={() => nav(-1)} aria-label="Go back">
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
         <span className="rd__topbar-title">Restaurant Details</span>
