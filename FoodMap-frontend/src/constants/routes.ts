@@ -7,6 +7,7 @@ export const ROUTES = {
   ACTIVITY: '/activity',
   PROFILE:  '/profile',
   VOTE:     '/vote',
+  VOTE_SUMMARY: '/vote/summary',
   USER:       '/user/:id',
   RESTAURANT:       '/restaurant/:id',
   RESTAURANT_REVIEW: '/restaurant/:id/review',

@@ -11,6 +11,7 @@ const STATIC_TITLES: Record<string, string> = {
   '/activity': 'Activity',
   '/profile': 'Profile',
   '/vote': 'Group Vote',
+  '/vote/summary': 'Voting Summary',
 }
 
 /** Maps a pathname to a human-readable screen name, handling dynamic routes. */

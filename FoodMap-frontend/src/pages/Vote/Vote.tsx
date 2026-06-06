@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Step1 } from './Step1'
 import { Step2 } from './Step2'
 import { Step3 } from './Step3'
@@ -8,7 +8,9 @@ import './Vote.css'
 
 export default function Vote() {
   const navigate = useNavigate()
-  const [step, setStep] = useState(1)
+  const { state } = useLocation()
+  const initialStep = (state as { step?: number } | null)?.step ?? 1
+  const [step, setStep] = useState(initialStep)
   const [showSnackbar, setShowSnackbar] = useState(false)
 
   // Step 1 State
@@ -32,7 +34,7 @@ export default function Vote() {
   return (
     <div className="vote-layout">
       <header className="vote-header">
-        <button className="vote-header-back" onClick={() => step > 1 ? setStep(step - 1) : navigate(-1)}>
+        <button className="vote-header-back" onClick={() => step > initialStep ? setStep(step - 1) : navigate(-1)}>
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
         <span className="vote-header-title">DineVote</span>
