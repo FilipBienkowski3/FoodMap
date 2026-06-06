@@ -64,6 +64,22 @@ VITE_FIREBASE_APP_ID=your_app_id
 ```
 
 
+## Hotjar
+
+The application integrates **Hotjar** (via the Contentsquare tracking tag) for session recordings, heatmaps, and user behavior analytics. The tag is injected at app startup.
+
+### Configuration
+
+Add the following environment variable to `FoodMap-frontend/.env`:
+
+```env
+VITE_HOTJAR_SCRIPT_ID=ec98349725618
+```
+
+`VITE_HOTJAR_SCRIPT_ID` is the ID from your Hotjar/Contentsquare tracking script URL (`https://t.contentsquare.net/uxa/<ID>.js`).
+
+When the script ID is not set, Hotjar stays disabled (same pattern as Google Analytics).
+
 ## Google Analytics
 
 The application integrates **Google Analytics** for user behavior analysis, using the `react-ga4` library wired into the SPA router.
