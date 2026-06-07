@@ -181,5 +181,5 @@ export default function Activity() {
 
       <Navbar />
     </div>
-  )
+  );
 }
