@@ -117,15 +117,25 @@ Poniższa tabela mapuje każdy punkt z listy wymagań na konkretną implementacj
 
 ### Google Analytics — screeny użycia
 
-#TODO: Zrzut ekranu panelu GA4 — widok **Realtime** z aktywnymi użytkownikami podczas korzystania z aplikacji.
+Zrzut ekranu panelu GA4 — widok **realtime** z aktywnymi użytkownikami podczas korzystania z aplikacji.
 
-#TODO: Zrzut ekranu GA4 — raport **Pages and screens** z listą tras (Home, Map, Login, Group Vote itd.).
+![realtime](.docs/screenshots/google_analytics/realtime.png)
 
-#TODO: Zrzut ekranu GA4 — raport **Events** z zdarzeniami niestandardowymi (`auth`, `map`, `vote`, `review`, `restaurant`).
+Zrzut ekranu GA4 — raport **strony i ekrany** z listą tras (/activity, /map, /vote/summary, itd.).
 
-#TODO: Zrzut ekranu GA4 — przykładowe zdarzenie `login` (kategoria `auth`, label `email` lub `google`).
+![pages_and_screens](.docs/screenshots/google_analytics/pages_and_screens.png)
 
-#TODO: Zrzut ekranu GA4 — przykładowe zdarzenie `map_pin_click` lub `search` (kategoria `map`).
+Zrzut ekranu GA4 — raport **zdarzenia** z zdarzeniami niestandardowymi.
+
+![events](.docs/screenshots/google_analytics/events.png)
+
+Zrzut ekranu GA4 — przykładowe zdarzenie `view_restaurant`.
+
+![view_restaurant](.docs/screenshots/google_analytics/view_restaurant.png)
+
+Zrzut ekranu GA4 — przykładowe zdarzenie `map_pin_click`.
+
+![map_pin_click](.docs/screenshots/google_analytics/map_pin_click.png)
 
 ---
 
