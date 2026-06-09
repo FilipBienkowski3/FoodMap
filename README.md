@@ -57,61 +57,59 @@ Poniższa tabela mapuje każdy punkt z listy wymagań na konkretną implementacj
 | 7 | Integracja Hotjar (analiza zachowań) | ✅ | Dynamiczne wstrzyknięcie skryptu Contentsquare/Hotjar w `config/hotjar.ts`, inicjalizacja w `main.tsx`. |
 | 8 | Integracja Google Analytics | ✅ | `react-ga4` w `config/analytics.ts`, automatyczne pageview przy zmianie trasy (`usePageTracking`) + zdarzenia niestandardowe w kluczowych interakcjach. |
 | 9 | Deploy aplikacji | ✅ | Aplikacja wdrożona na hostingu produkcyjnym (szczegóły w sekcji [Wdrożenie](#wdrożenie-deploy)). |
-| 10 | Dokumentacja README ze screenami | ✅ | Niniejszy plik — sekcja [Zrzuty ekranu](#zrzuty-ekranu) z placeholderami `#TODO` do uzupełnienia grafikami. |
+| 10 | Dokumentacja README ze screenami | ✅ | Niniejszy plik — sekcja [Zrzuty ekranu](#zrzuty-ekranu). |
 
 ---
 
 ## Zrzuty ekranu
 
-> **Instrukcja:** W miejscach oznaczonych `#TODO` należy wstawić odpowiedni zrzut ekranu (np. `![Opis](./docs/screenshots/nazwa-pliku.png)`).
 
 ### Aplikacja — ekrany główne
 
 #### Strona startowa (Home)
 
-#TODO: Zrzut ekranu strony głównej (`/`) — hero z logo FoodMap, tagline, przycisk „START THE HUNT" widoczny po zalogowaniu.
+![home](.docs/screenshots/main.png)
 
 #### Logowanie i rejestracja
 
-#TODO: Zrzut ekranu formularza logowania (`/login`) — pola e-mail/hasło, przyciski Login i Google.
+![login](.docs/screenshots/login.png)
 
-#TODO: Zrzut ekranu formularza rejestracji (`/register`) — pola imię, e-mail, hasło, potwierdzenie hasła.
+![register](.docs/screenshots/register.png)
 
 #### Mapa restauracji
 
-#TODO: Zrzut ekranu mapy (`/map`) — piny restauracji na mapie Krakowa, pasek filtrów u góry, dolna nawigacja.
-
-#TODO: Zrzut ekranu popupu pinu na mapie — nazwa lokalu, ocena, przycisk przejścia do szczegółów.
+![map](.docs/screenshots/map.png)
 
 #### Explore, Activity, Profile
 
-#TODO: Zrzut ekranu Explore (`/explore`) — lista kart użytkowników społeczności.
+![explore](.docs/screenshots/explore.png)
 
-#TODO: Zrzut ekranu Activity (`/activity`) — feed z zaproszeniem do głosowania, spotkaniem i przypomnieniem o recenzji.
+![activity](.docs/screenshots/activity.png)
 
-#TODO: Zrzut ekranu Profile (`/profile`) — avatar, statystyki, zakładka „Visited" z kartami dań.
+![profile](.docs/screenshots/profile.png)
 
-#TODO: Zrzut ekranu Profile — zakładka „Want to Visit".
+![profile_want_to_visit](.docs/screenshots/profile_want_to_visit.png)
 
 #### Restauracja i recenzje
 
-#TODO: Zrzut ekranu szczegółów restauracji (`/restaurant/:id`) — nagłówek, lista dań, przycisk ulubionych.
+![restaurant_details](.docs/screenshots/restaurant1.png)
 
-#TODO: Zrzut ekranu formularza recenzji (`/restaurant/:id/review`) — ocena gwiazdkowa i pole komentarza.
+![restaurant_details](.docs/screenshots/restaurant2.png)
+
+![review](.docs/screenshots/review.png)
 
 #### DineVote (głosowanie grupowe)
 
-#TODO: Zrzut ekranu DineVote — krok 1 (`/vote`) — tworzenie pokoju, zaproszenie znajomych.
+![vote](.docs/screenshots/vote.png)
 
-#TODO: Zrzut ekranu DineVote — krok 2 — wybór kuchni i głosowanie na lokal.
+![vote_step_2](.docs/screenshots/vote2.png)
 
-#TODO: Zrzut ekranu DineVote — krok 3 — wybór daty i przedziału czasowego.
+![vote_step_3](.docs/screenshots/vote3.png)
 
-#TODO: Zrzut ekranu podsumowania głosowania (`/vote/summary`) — zwycięski lokal, godzina, CTA.
 
 #### Profil innego użytkownika
 
-#TODO: Zrzut ekranu profilu użytkownika (`/user/:id`) — publiczny profil z aktywnością.
+![user_profile](.docs/screenshots/user_profile.png)
 
 ---
 
@@ -137,17 +135,6 @@ Zrzut ekranu GA4 — przykładowe zdarzenie `map_pin_click`.
 
 ![map_pin_click](.docs/screenshots/google_analytics/map_pin_click.png)
 
----
-
-### Hotjar — screeny użycia
-
-#TODO: Zrzut ekranu panelu Hotjar/Contentsquare — lista **Session Recordings** z nagraniami sesji użytkowników FoodMap.
-
-#TODO: Zrzut ekranu Hotjar — odtwarzacz nagrania sesji na ekranie mapy lub logowania.
-
-#TODO: Zrzut ekranu Hotjar — **Heatmap** (kliknięcia lub ruch myszy) na wybranym ekranie aplikacji, np. Home lub Map.
-
-#TODO: Zrzut ekranu Hotjar — dashboard potwierdzający aktywny tracking tag (ID skryptu z `VITE_HOTJAR_SCRIPT_ID`).
 
 ---
 
@@ -155,7 +142,6 @@ Zrzut ekranu GA4 — przykładowe zdarzenie `map_pin_click`.
 
 #TODO: Zrzut ekranu panelu hostingu (np. Railway, Vercel, Netlify) — status wdrożenia frontendu, URL produkcyjny, ostatni successful deploy.
 
-#TODO: Zrzut ekranu aplikacji działającej pod publicznym adresem URL w przeglądarce.
 
 ---
 
@@ -421,7 +407,8 @@ Wynikowy katalog `FoodMap-frontend/dist/` zawiera statyczne pliki gotowe do host
 
 ### Adres produkcyjny
 
-#TODO: Wstaw tutaj publiczny URL wdrożonej aplikacji, np. `https://foodmap.example.com`
+https://food-map-drab.vercel.app/
+
 
 ### Proces wdrożenia
 
@@ -430,6 +417,4 @@ Wynikowy katalog `FoodMap-frontend/dist/` zawiera statyczne pliki gotowe do host
 3. Komenda build: `npm run build` (katalog roboczy: `FoodMap-frontend`).
 4. Katalog publikacji: `dist`.
 5. Reguła SPA fallback — przekierowanie wszystkich ścieżek na `index.html` (wymagane dla React Router).
-
-#TODO: Zrzut ekranu konfiguracji deploy w panelu hostingu — zmienne środowiskowe, komenda build, status successful deploy.
 
