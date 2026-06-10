@@ -139,8 +139,13 @@ Zrzut ekranu GA4 — przykładowe zdarzenie `map_pin_click`.
 ---
 
 ### Deploy
+Proces wdrożenia aplikacji frontendowej został zrealizowany z wykorzystaniem platformy Vercel. Platforma automatycznie buduje i publikuje nowe wersje aplikacji po zmianach w repozytorium źródłowym.
 
-#TODO: Zrzut ekranu panelu hostingu (np. Railway, Vercel, Netlify) — status wdrożenia frontendu, URL produkcyjny, ostatni successful deploy.
+Na rysunku przedstawiono panel administracyjny Vercel zawierający status wdrożenia, adres środowiska produkcyjnego oraz informacje o ostatnim pomyślnym wdrożeniu.
+
+![Panel Vercel](.docs/screenshots/vercel/vercel.png)
+
+URL produkcyjny: https://food-map-drab.vercel.app/
 
 
 ---
