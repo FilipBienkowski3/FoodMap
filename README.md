@@ -387,10 +387,11 @@ Integracja narzędzia do analizy zachowań użytkowników (Hotjar / Contentsquar
 
 ### Co rejestruje Hotjar
 
-- Nagrania sesji użytkowników (session recordings)
 - Mapy ciepła kliknięć i ruchu kursora (heatmaps)
+![heatmap](.docs/screenshots/hotjar/heatmap.png)
 - Zachowania na poszczególnych ekranach aplikacji
-
+![pages](.docs/screenshots/hotjar/pages.png)
+- I inne
 ---
 
 ## Wdrożenie (deploy)
