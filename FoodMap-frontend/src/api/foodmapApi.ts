@@ -1,18 +1,10 @@
-import axios from 'axios'
 import type { Restaurant } from '../constants/restaurant'
-
-const api = axios.create({ baseURL: 'http://localhost:3000' })
+import { restaurants, toMapSpot } from '../data/restaurants'
 
 export type MapSpot = Pick<
   Restaurant,
   'id' | 'lat' | 'lng' | 'icon' | 'name' | 'price' | 'rating' | 'hours' | 'img'
 >
-
-export const loginUser = (email: string, password: string) =>
-  api.post('/login', { email, password }).then(r => r.data)
-
-export const registerUser = (email: string, password: string, name: string) =>
-  api.post('/register', { email, password, name }).then(r => r.data)
 
 const RESTAURANTS_CACHE_KEY = 'foodmap:restaurants'
 
@@ -25,18 +17,25 @@ export const readRestaurantsCache = (): MapSpot[] | null => {
   }
 }
 
-export const getRestaurants = () =>
-  api.get<MapSpot[]>('/restaurants').then(r => {
-    try {
-      sessionStorage.setItem(RESTAURANTS_CACHE_KEY, JSON.stringify(r.data))
-    } catch { /* quota / private mode */ }
-    return r.data
-  })
+const cacheRestaurants = (data: MapSpot[]) => {
+  try {
+    sessionStorage.setItem(RESTAURANTS_CACHE_KEY, JSON.stringify(data))
+  } catch { /* quota / private mode */ }
+}
+
+export const getRestaurants = () => {
+  const data = restaurants.map(toMapSpot)
+  cacheRestaurants(data)
+  return Promise.resolve(data)
+}
 
 /** Warm cache after login so the map route feels instant. */
 export const prefetchRestaurants = () => {
   getRestaurants().catch(() => {})
 }
 
-export const getRestaurant = (id: number) =>
-  api.get<Restaurant>(`/restaurants/${id}`).then(r => r.data)
+export const getRestaurant = (id: number) => {
+  const restaurant = restaurants.find(r => r.id === id)
+  if (!restaurant) return Promise.reject(new Error('Restaurant not found'))
+  return Promise.resolve(restaurant)
+}
